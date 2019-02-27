@@ -1,18 +1,28 @@
 package com.zipcodewilmington.assessment2.part2;
 
-import java.util.List;
+import java.util.*;
 
 public class ListUtility {
+    List<Integer> list = new ArrayList<>();
+
     public Boolean add(int i) {
-        return null;
+        return list.add(i);
     }
 
     public Integer size() {
-        return null;
+        return list.size();
     }
 
     public List<Integer> getUnique() {
-        return null;
+        Set<Integer> unique = new HashSet<>();
+        for (Integer entry: list) {
+            unique.add(entry);
+        }
+        List<Integer> modified = new ArrayList<>();
+        for (Integer entry: unique) {
+            modified.add(entry);
+        }
+        return modified;
     }
 
     public String join() {
@@ -24,6 +34,6 @@ public class ListUtility {
     }
 
     public Boolean contains(Integer valueToAdd) {
-        return null;
+        return list.contains(valueToAdd);
     }
 }
