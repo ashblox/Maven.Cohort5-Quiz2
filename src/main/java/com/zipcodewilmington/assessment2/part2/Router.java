@@ -16,13 +16,7 @@ public class Router {
     }
 
     public String getController(String path) {
-        String key = "";
-        for (Map.Entry<String, String> entry: map.entrySet()){
-            if (entry.getValue() == path) {
-                key = entry.getKey();
-            }
-        }
-        return key;
+        return map.get(path);
     }
 
     public void update(String path, String studentController) {
