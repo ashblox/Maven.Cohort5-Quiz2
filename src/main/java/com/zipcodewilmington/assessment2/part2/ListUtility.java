@@ -26,11 +26,33 @@ public class ListUtility {
     }
 
     public String join() {
-        return null;
+       String concat = "";
+        for (int i = 0; i < list.size(); i++) {
+            concat += Integer.toString(list.get(i)) + ", ";
+
+        }
+        concat = concat.substring(0, concat.length()-2);
+        return concat;
     }
 
     public Integer mostCommon() {
-        return null;
+        Map<Integer, Integer> frequencies = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (frequencies.containsKey(list.get(i))) {
+                Integer value = frequencies.get(list.get(i));
+                value++;
+                frequencies.put(list.get(i), value);
+            } else {
+                frequencies.put(list.get(i), 1);
+            }
+        }
+        Integer mostCommon = null;
+        for (Map.Entry<Integer, Integer> entry: frequencies.entrySet()) {
+            if (mostCommon == null || mostCommon < entry.getKey()) {
+                mostCommon = entry.getKey();
+            }
+        }
+        return mostCommon;
     }
 
     public Boolean contains(Integer valueToAdd) {
