@@ -9,26 +9,14 @@ public class WuTangConcatenator {
     }
 
     public Boolean isWu() {
-        if (input % 3 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return input % 3 == 0;
     }
 
     public Boolean isTang() {
-        if (input % 5 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return input % 5 == 0;
     }
 
     public Boolean isWuTang() {
-        if (input % 3 == 0 && input % 5 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return input % 3 == 0 && input % 5 == 0;
     }
 }

@@ -26,4 +26,12 @@ public class Router {
     public void remove(String path) {
         map.remove(path);
     }
+
+    public String toString() {
+        String concat = "";
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            concat += String.format("%s -> %s\n", entry.getKey(), entry.getValue());
+        }
+        return concat;
+    }
 }

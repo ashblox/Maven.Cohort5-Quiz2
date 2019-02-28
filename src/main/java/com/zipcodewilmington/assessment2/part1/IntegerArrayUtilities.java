@@ -1,25 +1,14 @@
 package com.zipcodewilmington.assessment2.part1;
 
+import java.util.stream.IntStream;
+
 public class IntegerArrayUtilities {
     public Boolean hasEvenLength(Integer[] array) {
-        if (array.length % 2 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return array.length % 2 == 0;
     }
 
     public Integer[] range(int start, int stop) {
-        int length = stop - start;
-        if (length > 0) {
-            Integer[] range = new Integer[length + 1];
-            for (int i = 0; i < range.length; i++) {
-                range[i] = start++;
-            }
-            return range;
-        } else {
-            return null;
-        }
+        return IntStream.rangeClosed(start, stop).boxed().toArray(Integer[]::new);
     }
 
     public Integer getSumOfFirstTwo(Integer[] array) {

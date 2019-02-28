@@ -3,9 +3,10 @@ package com.zipcodewilmington.assessment2.part2;
 import java.util.*;
 
 public class ListUtility {
+
     List<Integer> list = new ArrayList<>();
 
-    public Boolean add(int i) {
+    public Boolean add(Integer i) {
         return list.add(i);
     }
 
@@ -14,45 +15,18 @@ public class ListUtility {
     }
 
     public List<Integer> getUnique() {
-        Set<Integer> unique = new HashSet<>();
-        for (Integer entry: list) {
-            unique.add(entry);
-        }
-        List<Integer> modified = new ArrayList<>();
-        for (Integer entry: unique) {
-            modified.add(entry);
-        }
-        return modified;
+        return new ArrayList<>(new HashSet<>(list));
     }
 
     public String join() {
-       String concat = "";
-        for (int i = 0; i < list.size(); i++) {
-            concat += Integer.toString(list.get(i)) + ", ";
-
-        }
-        concat = concat.substring(0, concat.length()-2);
-        return concat;
+        String concat = list.toString();
+        return concat.substring(1, concat.length() - 1);
     }
 
     public Integer mostCommon() {
-        Map<Integer, Integer> frequencies = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (frequencies.containsKey(list.get(i))) {
-                Integer value = frequencies.get(list.get(i));
-                value++;
-                frequencies.put(list.get(i), value);
-            } else {
-                frequencies.put(list.get(i), 1);
-            }
-        }
-        Integer mostCommon = null;
-        for (Map.Entry<Integer, Integer> entry: frequencies.entrySet()) {
-            if (mostCommon == null || mostCommon < entry.getKey()) {
-                mostCommon = entry.getKey();
-            }
-        }
-        return mostCommon;
+        Integer[] converted = new Integer[list.size()];
+        ArrayUtility arrUtil = new ArrayUtility();
+        return arrUtil.mostCommon(converted);
     }
 
     public Boolean contains(Integer valueToAdd) {

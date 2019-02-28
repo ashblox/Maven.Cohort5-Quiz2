@@ -1,69 +1,36 @@
 package com.zipcodewilmington.assessment2.part2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ArrayUtility {
+
     public Integer[] merge(Integer[] array1, Integer[] array2) {
-        Integer [] merged = new Integer[array1.length + array2.length];
-        for (int i = 0; i < array1.length ; i++) {
-            merged[i] = array1[i];
-        }
-        int indexOfArr2 = 0;
-        for (int j = array1.length; j < merged.length; j++) {
-            merged[j] = array2[indexOfArr2];
-            indexOfArr2++;
-        }
-        return merged;
+        List<Integer> arr1 = new ArrayList<>(Arrays.asList(array1));
+        arr1.addAll(Arrays.asList(array2));
+        Integer[] merged = new Integer[arr1.size()];
+        return arr1.toArray(merged);
     }
 
     public Integer[] rotate(Integer[] array, Integer index) {
-        Integer[] rotated = new Integer[array.length];
-        int newIndex1 = index;
-        for (int i = 0; i < array.length - index; i++) {
-            rotated[i] = array[index];
-            newIndex1++;
-        }
-        int newIndex2 = 0;
-        for (int j = index - 1; j < array.length; j++) {
-            rotated[j] = array[newIndex2];
-            newIndex2++;
-        }
-        return rotated;
+        Integer[] arr1 = Arrays.copyOfRange(array, 0, index);
+        Integer[] arr2 = Arrays.copyOfRange(array, index, array.length);
+        return merge(arr2, arr1);
     }
 
     public Integer countOccurrence(Integer[] array1, Integer[] array2, Integer valueToEvaluate) {
-        int count = 0;
-        for (int i = 0; i < array1.length; i++) {
-            if (array1[i] == valueToEvaluate) {
-                count++;
-            }
-        }
-        for (int j = 0; j < array2.length; j++) {
-            if (array2[j] == valueToEvaluate) {
-                count++;
-            }
-        }
-        return count;
+        Integer freqInArr1 = Collections.frequency(Arrays.asList(array1), valueToEvaluate);
+        Integer freqInArr2 = Collections.frequency(Arrays.asList(array2), valueToEvaluate);
+        return freqInArr1 + freqInArr2;
     }
 
     public Integer mostCommon(Integer[] array) {
-        Map<Integer, Integer> frequencies = new HashMap<>();
-        for (int i = 0; i < array.length; i++) {
-            if (frequencies.containsKey(array[i])) {
-                Integer value = frequencies.get(array[i]);
-                value++;
-                frequencies.put(array[i], value);
-            } else {
-                frequencies.put(array[i], 1);
-            }
-        }
+        Integer occurrences = null;
         Integer mostCommon = null;
-        for (Map.Entry<Integer, Integer> entry: frequencies.entrySet()) {
-            if (mostCommon == null || mostCommon < entry.getKey()) {
-                mostCommon = entry.getKey();
+        for (int i = 0; i < array.length; i++) {
+            Integer frequency = Collections.frequency(Arrays.asList(array), array[i]);
+            if (occurrences == null || occurrences < frequency) {
+                occurrences = frequency;
+                mostCommon = array[i];
             }
         }
         return mostCommon;
